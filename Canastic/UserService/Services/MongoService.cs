@@ -6,15 +6,16 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using MongoDB.Bson;
+using System.Configuration;
 
 namespace PlayerService.Services
 {
     public class MongoService : IMongoService
     {
-        IMongoDatabase _db; 
+        IMongoDatabase _db;
         public MongoService(string database)
         {
-
+            //MongoClient client = new(ConfigurationManager.ConnectionStrings["MongoDBConn"].ConnectionString);
             MongoClient client = new(GetConnection().GetSection("ConnectionStrings").GetSection("MongoDBConn").Value);
             _db = client.GetDatabase(database);
         }
@@ -24,6 +25,7 @@ namespace PlayerService.Services
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             return builder;
         }
+
         public void DeleteRecord<T>(string table, Guid id)
         {
             var collection = _db.GetCollection<T>(table);
@@ -31,10 +33,10 @@ namespace PlayerService.Services
             collection.DeleteOne(filter);
         }
 
-        public void InsertRecord<T>(string table, T record)
+        public async void InsertRecord<T>(string table, T record)
         {
             var collection = _db.GetCollection<T>(table);
-            collection.InsertOne(record);
+            await collection.InsertOneAsync(record);
         }
 
         public T LoadRecordByID<T>(string table, Guid id)
