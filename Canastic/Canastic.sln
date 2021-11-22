@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayerService", "UserService\PlayerService.csproj", "{C22258A0-27E1-4601-A1C3-6949AACA96F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{FAC17E83-CEB9-434E-A9D7-D8214D6E3536}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameService", "GameService\GameService.csproj", "{DA0090DC-7549-43D1-9E33-EB6B74F7CD63}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C22258A0-27E1-4601-A1C3-6949AACA96F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C22258A0-27E1-4601-A1C3-6949AACA96F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C22258A0-27E1-4601-A1C3-6949AACA96F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C22258A0-27E1-4601-A1C3-6949AACA96F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC17E83-CEB9-434E-A9D7-D8214D6E3536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC17E83-CEB9-434E-A9D7-D8214D6E3536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC17E83-CEB9-434E-A9D7-D8214D6E3536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC17E83-CEB9-434E-A9D7-D8214D6E3536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0090DC-7549-43D1-9E33-EB6B74F7CD63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0090DC-7549-43D1-9E33-EB6B74F7CD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0090DC-7549-43D1-9E33-EB6B74F7CD63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0090DC-7549-43D1-9E33-EB6B74F7CD63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
