@@ -1,45 +1,11 @@
 ﻿
-
-
-
-@*<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">CanasticUI</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="players">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Spillere
-            </NavLink>
-        </li>
-    </ul>
-</div>*@
-
-<MudDrawer @bind-Open="collapseNavMenu" Elevation="1">
+<MudDrawer @bind-Open="NavBarOpen" Elevation="1">
     <MudDrawerHeader>
-        <MudAvatar Color="Color.Transparent" Size="Size.Large" />
-        <MudText Typo="Typo.h5" Color="Color.Primary" Style="margin-top:10px; margin-left:15px;">Canastic</MudText>
+        <MudIcon Size="Size.Large" Color="Color.Inherit" Icon="@Icons.Material.Filled.Games" />
+        <MudText Typo="Typo.h4" Color="Color.Primary" Style="margin-left:15px;" Align="Align.Center">Canastic</MudText>
     </MudDrawerHeader>
     <MudNavMenu>
+        @* Add more sites *@
         <MudNavGroup Title="Settings" Icon="@Icons.Material.Filled.Settings" Expanded="true">
             <MudNavLink Href="players" Icon="@Icons.Material.Filled.Person">Spillere</MudNavLink>
         </MudNavGroup>
@@ -48,12 +14,6 @@
 
 
 @code {
-    private bool collapseNavMenu = true;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
+    [Parameter]
+    public bool NavBarOpen { get; set; }
 }
