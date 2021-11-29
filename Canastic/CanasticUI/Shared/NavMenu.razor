@@ -1,4 +1,8 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿
+
+
+
+@*<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">CanasticUI</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -28,7 +32,20 @@
             </NavLink>
         </li>
     </ul>
-</div>
+</div>*@
+
+<MudDrawer @bind-Open="collapseNavMenu" Elevation="1">
+    <MudDrawerHeader>
+        <MudAvatar Color="Color.Transparent" Size="Size.Large" />
+        <MudText Typo="Typo.h5" Color="Color.Primary" Style="margin-top:10px; margin-left:15px;">Canastic</MudText>
+    </MudDrawerHeader>
+    <MudNavMenu>
+        <MudNavGroup Title="Settings" Icon="@Icons.Material.Filled.Settings" Expanded="true">
+            <MudNavLink Href="players" Icon="@Icons.Material.Filled.Person">Spillere</MudNavLink>
+        </MudNavGroup>
+    </MudNavMenu>
+</MudDrawer>
+
 
 @code {
     private bool collapseNavMenu = true;

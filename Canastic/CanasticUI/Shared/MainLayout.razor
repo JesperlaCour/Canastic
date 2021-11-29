@@ -1,6 +1,85 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
+<MudLayout>
+    <MudAppBar Elevation="3">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="ToogleNavbar"/>
+        <MudAppBarSpacer />
+        @if (_isLightMode)
+        {
+            <MudIconButton Icon="@Icons.Material.Filled.Brightness5" Color="Color.Inherit" OnClick="ToggleTheme" />
+        }
+        else
+        {
+            <MudIconButton Icon="@Icons.Material.Filled.Brightness3" Color="Color.Inherit" OnClick="ToggleTheme" />
+        }
+    </MudAppBar>
+    <MudDrawer @bind-Open="_navbarOpen" Elevation="1">
+        <MudDrawerHeader>
+            <MudAvatar Color="Color.Transparent" Size="Size.Large" />
+            <MudText Typo="Typo.h5" Color="Color.Primary" Style="margin-top:10px; margin-left:15px;">Canastic</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu>
+            <MudNavGroup Title="Settings" Icon="@Icons.Material.Filled.Settings" Expanded="true">
+                <MudNavLink Href="players" Icon="@Icons.Material.Filled.Person">Spillere</MudNavLink>
+            </MudNavGroup>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent Class="pt-16 px-16">
+        <MudContainer Class="mt-6">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code{
+
+    bool _isLightMode = true;
+    private MudTheme _currentTheme = new MudTheme();
+    [Parameter]
+    public bool _navbarOpen { get; set; }
+
+    private void ToogleNavbar()
+    {
+        _navbarOpen = !_navbarOpen;
+    }
+
+    private void ToggleTheme()
+    {
+        _isLightMode = !_isLightMode;
+
+        if (!_isLightMode)
+        {
+            _currentTheme = GenerateDarkTheme();
+        }
+        else
+        {
+            _currentTheme = new MudTheme();
+        }
+    }
+
+    private MudTheme GenerateDarkTheme() =>
+        new MudTheme
+        {
+            Palette = new Palette()
+            {
+                Black = "#27272f",
+                Background = "#32333d",
+                BackgroundGrey = "#27272f",
+                Surface = "#373740",
+                TextPrimary = "#ffffffb3",
+                TextSecondary = "rgba(255,255,255, 0.50)",
+                AppbarBackground = "#27272f",
+                AppbarText = "#ffffffb3"
+            }
+        };
+}
+
+@*<div class="page">
+    <MudAppBar Color="Color.Primary" Fixed="false">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"/>
+        
+    </MudAppBar>
+
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -14,7 +93,7 @@
             @Body
         </div>
     </div>
-</div>
+</div>*@
 
-<MudThemeProvider />
+<MudThemeProvider Theme="_currentTheme" />
 <MudSnackbarProvider />
