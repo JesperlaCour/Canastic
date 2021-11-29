@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Shared.Models
+namespace SharedService.Models
 {
     [BsonIgnoreExtraElements]
     public class PlayerShort

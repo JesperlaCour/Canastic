@@ -1,0 +1,19 @@
+﻿
+<MudDrawer @bind-Open="NavBarOpen" Elevation="1">
+    <MudDrawerHeader>
+        <MudIcon Size="Size.Large" Color="Color.Inherit" Icon="@Icons.Material.Filled.Games" />
+        <MudText Typo="Typo.h4" Color="Color.Primary" Style="margin-left:15px;" Align="Align.Center">Canastic</MudText>
+    </MudDrawerHeader>
+    <MudNavMenu>
+        @* Add more sites *@
+        <MudNavGroup Title="Settings" Icon="@Icons.Material.Filled.Settings" Expanded="true">
+            <MudNavLink Href="players" Icon="@Icons.Material.Filled.Person">Spillere</MudNavLink>
+        </MudNavGroup>
+    </MudNavMenu>
+</MudDrawer>
+
+
+@code {
+    [Parameter]
+    public bool NavBarOpen { get; set; }
+}

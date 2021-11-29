@@ -1,0 +1,57 @@
+﻿@inherits LayoutComponentBase
+
+<MudLayout>
+    <AppBar NavBarToggled="ToogleNavbar" ThemeToggled="ToggleTheme" />
+
+    <NavMenu NavBarOpen="_navbarOpen" />
+
+    <MudMainContent Class="pt-16 px-16">
+        <MudContainer Class="mt-6">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+<MudThemeProvider Theme="_currentTheme" />
+<MudSnackbarProvider />
+
+@code{
+
+    private MudTheme _currentTheme = new MudTheme();
+
+    public bool _navbarOpen = false;
+
+
+
+    private void ToogleNavbar()
+    {
+        _navbarOpen = !_navbarOpen;
+    }
+
+    private void ToggleTheme(MudTheme changedTheme)
+    {
+        _currentTheme = changedTheme;
+    }
+
+    //private MudTheme GenerateDarkTheme() =>
+    //    new MudTheme
+    //    {
+    //        Palette = new Palette()
+    //        {
+    //            Black = "#27272f",
+    //            Background = "#32333d",
+    //            BackgroundGrey = "#27272f",
+    //            Surface = "#373740",
+    //            TextPrimary = "#ffffffb3",
+    //            TextSecondary = "rgba(255,255,255, 0.50)",
+    //            AppbarBackground = "#27272f",
+    //            AppbarText = "#ffffffb3",
+    //            DrawerBackground = "#27272f",
+    //            DrawerText = "#ffffffb3",
+    //            DrawerIcon = "#ffffffb3"
+    //        }
+    //    };
+}
+
+<MudThemeProvider Theme="_currentTheme" />
+<MudSnackbarProvider />

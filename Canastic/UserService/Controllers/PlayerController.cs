@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlayerService.Services;
-using Shared.Models;
+using SharedService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,14 +25,14 @@ namespace PlayerService.Controllers
 
         // GET: api/<PlayerController>
         [HttpGet]
-        public IEnumerable<PlayerShort> Get()
+        public IEnumerable<Player> Get()
         {
-            var result = DbService.LoadRecords<PlayerShort>(DbTable);
+            var result = DbService.LoadRecords<Player>(DbTable);
             return result.ToList();
         }
 
         // GET api/<PlayerController>/5
-        [HttpGet("{Guid}")]
+        [HttpGet("{id}")]
         public Player Get(Guid id)
         {
             var result = DbService.LoadRecordByID<Player>(DbTable, id);
@@ -54,7 +54,7 @@ namespace PlayerService.Controllers
         }
 
         // DELETE api/<PlayerController>/5
-        [HttpDelete("{Guid}")]
+        [HttpDelete("{id}")]
         public void Delete(Guid id)
         {
             DbService.DeleteRecord<Player>(DbTable, id);
