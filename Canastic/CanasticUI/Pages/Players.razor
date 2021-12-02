@@ -93,8 +93,16 @@ else
     private async void Save()
     {
         player.PlayedSince = DateTime.Now;
-        await _playerService.PostPlayer(player);
-        snackBar.Add("Ny spiller gemt", Severity.Success);
+        if (player.Id == new Guid())
+        {
+            await _playerService.PostPlayer(player);
+            snackBar.Add("Ny spiller gemt", Severity.Success);
+        }
+        else
+        {
+            await _playerService.UpdatePlayer(player);
+        }
+
         players = await _playerService.GetPlayers();
         player = new();
         StateHasChanged();

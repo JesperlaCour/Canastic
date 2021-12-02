@@ -35,6 +35,11 @@ namespace CanasticUI.Data
             
         }
 
+        public async Task UpdatePlayer(PlayerDTO player)
+        {
+            var result = await client.PutAsJsonAsync("api/player", player);
+        }
+
         public async Task PostPlayer(PlayerDTO player)
         {
             

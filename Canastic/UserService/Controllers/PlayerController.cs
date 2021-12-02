@@ -47,10 +47,10 @@ namespace PlayerService.Controllers
         }
 
         // PUT api/<PlayerController>/5
-        [HttpPut("{Guid}")]
-        public void Put(Guid id, [FromBody] PlayerDTO value)
+        [HttpPut]
+        public void Put([FromBody] PlayerDTO value)
         {
-            DbService.UpsertRecord(DbTable,value.Id, value);
+            DbService.UpsertRecord(DbTable, value.Id, value);
         }
 
         // DELETE api/<PlayerController>/5
