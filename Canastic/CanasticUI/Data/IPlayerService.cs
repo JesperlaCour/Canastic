@@ -6,6 +6,6 @@ namespace CanasticUI.Data
 {
     public interface IPlayerService
     {
-        Task<List<Player>> GetPlayers();
+        Task<List<PlayerDTO>> GetPlayers();
     }
 }

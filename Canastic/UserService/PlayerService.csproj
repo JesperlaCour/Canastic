@@ -6,6 +6,7 @@
     <None Remove="Services\ppwytja1.c23~" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EasyNetQ" Version="6.3.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.13.2" />
     <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
