@@ -1,0 +1,41 @@
+﻿@page "/Rules"
+@inject PlayerService _playerService
+@inject ISnackbar snackBar
+@inject IJSRuntime JSRuntime;
+
+@*<MudCard>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">Regler for Canasta</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudIconButton Icon="@Icons.Material.Filled.OpenInNew" OnClick="OpenInNewTab" Color="Color.Primary" />
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>*@
+        <MudExpansionPanels MultiExpansion="true">
+            <MudExpansionPanel Text="Giv kort">
+                Panel One Content
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Tæl point">
+                Panel Two Content
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Kortetsværdi">
+                Panel Three Content
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Andet">
+                Panel Four Content
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+    @*</MudCardContent>*@
+@*</MudCard>*@
+
+@code {
+
+    private async void OpenInNewTab()
+    {
+        await JSRuntime.InvokeAsync<object>("open", "rules");
+
+    }
+
+}

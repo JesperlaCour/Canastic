@@ -20,13 +20,22 @@ namespace CanasticUI.Data
             client.BaseAddress = new Uri("https://localhost:44382");
         }
 
-        public async Task<List<Player>> GetPlayers()
+        public async Task<List<PlayerDTO>> GetPlayers()
         {
-            var result = await client.GetFromJsonAsync<List<Player>>("api/player");
-            return result;
+            try
+            {
+                var result = await client.GetFromJsonAsync<List<PlayerDTO>>("api/player");
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
-        public async Task PostPlayer(Player player)
+        public async Task PostPlayer(PlayerDTO player)
         {
             
             var result = await client.PostAsJsonAsync("api/player",player);

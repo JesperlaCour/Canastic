@@ -1,12 +1,15 @@
 ﻿@page "/players"
-@using SharedService.Models
-@using CanasticUI.Data
 @inject PlayerService _playerService
 @inject ISnackbar snackBar
+@inject IDialogService DialogService
 
 @if (players is null)
 {
-    <p><em>Loading...</em></p>
+<MudGrid>
+    <MudItem>
+        <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+    </MudItem>
+</MudGrid>
 }
 else
 {
@@ -22,14 +25,12 @@ else
     </MudCardHeader>
     <MudCardContent>
         <MudTextField @bind-Value="player.PlayerName" Label="spiller navn" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-        @*<MudTextField @bind-Value="player.PlayedSince" Label="har spillet siden" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            <MudTextField @bind-Value="player.TotalWins" Label="total antal sejre" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>*@
         <br />
         <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Success" OnClick="Save">Gem</MudButton>
     </MudCardContent>
 </MudCard>
 <br />
-<MudTable Hover="false" Elevation="25" Items="players" Filter="new Func<Player, bool>(Search)" @bind-customer="player">
+<MudTable Hover="false" Elevation="25" Items="players" Filter="new Func<PlayerDTO, bool>(Search)" @bind-customer="player">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Spillere</MudText>
         <MudToolBarSpacer />
@@ -63,15 +64,24 @@ else
 @code {
     private string searchString = "";
 
-    private Player player = new();
-    private List<Player> players;
+    private PlayerDTO player = new();
+    private List<PlayerDTO> players;
 
     protected override async Task OnInitializedAsync()
     {
-        players = await _playerService.GetPlayers();
+        try
+        {
+            players = await _playerService.GetPlayers();
+        }
+        catch (Exception)
+        {
+            var result = await DialogService.ShowMessageBox("Fejl", "Kan ikke indlæse fra database", yesText: "accepter");
+
+        }
+
     }
 
-    private bool Search(Player player)
+    private bool Search(PlayerDTO player)
     {
         if (player.PlayerName is not null && player.PlayerName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
         {
