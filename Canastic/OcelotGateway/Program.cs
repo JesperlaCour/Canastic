@@ -23,7 +23,7 @@ namespace OcelotGateway
                     var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
                     webBuilder.UseStartup<Startup>();
                     webBuilder.ConfigureAppConfiguration(config =>
-                    config.AddJsonFile($"ocelot.{env}.json"));
+                    config.AddJsonFile($"ocelot.development.json"));
                 })
             .ConfigureLogging(logging => logging.AddConsole()); 
     }

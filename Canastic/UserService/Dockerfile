@@ -2,16 +2,16 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 15020
+EXPOSE 15021
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["PlayerService/PlayerService.csproj", "PlayerService/"]
+COPY ["UserService/PlayerService.csproj", "UserService/"]
 COPY ["Shared/SharedService.csproj", "Shared/"]
-RUN dotnet restore "PlayerService/PlayerService.csproj"
+RUN dotnet restore "UserService/PlayerService.csproj"
 COPY . .
-WORKDIR "/src/PlayerService"
+WORKDIR "/src/UserService"
 RUN dotnet build "PlayerService.csproj" -c Release -o /app/build
 
 FROM build AS publish

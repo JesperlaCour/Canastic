@@ -1,19 +1,19 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{url}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/player",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 15020
         }
       ],
-      "UpstreamPathTemplate": "/api/{url}",
+      "UpstreamPathTemplate": "/api/player",
       "UpstreamHttpMethod": [ "Get" ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5021"
+    "BaseUrl": "http://localhost:14020"
   }
 }
