@@ -1,0 +1,25 @@
+﻿@page "/teams"
+@inject PlayerService _playerService
+@inject ISnackbar snackBar
+@inject IDialogService DialogService
+
+@if (teams is null)
+{
+    <MudGrid>
+        <MudItem>
+            <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+        </MudItem>
+    </MudGrid>
+    @*<MudCard Elevation="25">
+            <MudCardHeader>
+                <MudCardContent>
+                    <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true"/>
+                </MudCardContent>
+            </MudCardHeader>
+
+        </MudCard>*@
+}
+
+@code {
+    private List<TeamDTO> teams;
+}

@@ -25,39 +25,39 @@ namespace PlayerService.Controllers
 
         // GET: api/<PlayerController>
         [HttpGet]
-        public IEnumerable<Player> Get()
+        public IEnumerable<PlayerDTO> Get()
         {
-            var result = DbService.LoadRecords<Player>(DbTable);
+            var result = DbService.LoadRecords<PlayerDTO>(DbTable);
             return result.ToList();
         }
 
         // GET api/<PlayerController>/5
         [HttpGet("{id}")]
-        public Player Get(Guid id)
+        public PlayerDTO Get(Guid id)
         {
-            var result = DbService.LoadRecordByID<Player>(DbTable, id);
+            var result = DbService.LoadRecordByID<PlayerDTO>(DbTable, id);
             return result;
         }
 
         // POST api/<PlayerController>
         [HttpPost]
-        public void Post([FromBody] Player value)
+        public void Post([FromBody] PlayerDTO value)
         {
             DbService.InsertRecord(DbTable, value);            
         }
 
         // PUT api/<PlayerController>/5
-        [HttpPut("{Guid}")]
-        public void Put(Guid id, [FromBody] Player value)
+        [HttpPut]
+        public void Put([FromBody] PlayerDTO value)
         {
-            DbService.UpsertRecord(DbTable,value.Id, value);
+            DbService.UpsertRecord(DbTable, value.Id, value);
         }
 
         // DELETE api/<PlayerController>/5
         [HttpDelete("{id}")]
         public void Delete(Guid id)
         {
-            DbService.DeleteRecord<Player>(DbTable, id);
+            DbService.DeleteRecord<PlayerDTO>(DbTable, id);
         }
     }
 }

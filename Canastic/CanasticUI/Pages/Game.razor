@@ -1,0 +1,101 @@
+﻿@page "/Game"
+@inject PlayerService _playerService
+@inject ISnackbar snackBar
+
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.Small" >
+    <MudGrid Justify="Justify.SpaceEvenly">
+        <MudItem xs="12" sm="12">
+            <MudExpansionPanels>
+                <MudExpansionPanel>
+                    <TitleContent>
+                        <div class="d-flex">
+                            <MudIcon Icon="@Icons.Material.Filled.AddCircle" Color="Color.Primary" Class="mr-3" />
+                            <MudText>Nyt spil</MudText>
+                        </div>
+                    </TitleContent>
+                    <ChildContent>
+                        <MudForm @bind-IsValid="@isValid">
+                            <MudSelect @bind-Value="teamOne" Required="true" T="object" Label="Team 1">
+                                @foreach (var item in collection)
+                                {
+                                    <MudSelectItem Value="item"></MudSelectItem>
+                                }
+                            </MudSelect>
+                            <MudSelect @bind-Value="teamTwo" Required="true" T="object" Label="Team 2">
+                                @foreach (var item in collection)
+                                {
+                                    <MudSelectItem Value="item"></MudSelectItem>
+                                }
+                            </MudSelect>
+                            <MudButton Disabled="@(!isValid)" Color="Color.Success" Variant="Variant.Filled" FullWidth="true" Style="margin-top: 10px; justify-content:center" EndIcon="@Icons.Material.Filled.PlayCircleFilled" OnClick="StartNewGame_onClick">Spil</MudButton>
+                        </MudForm>
+                    </ChildContent>
+                </MudExpansionPanel>
+                <MudExpansionPanel Text="Gemte spil" MaxHeight="100">
+                    <TitleContent>
+                        <div class="d-flex">
+                            <MudIcon Icon="@Icons.Material.Filled.CloudDownload" Color="Color.Primary" Class="mr-3" />
+                            <MudText>Gemte spil</MudText>
+                        </div>
+                    </TitleContent>
+                    <ChildContent>
+                        loading... (not working)
+                    </ChildContent>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+            <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+        </MudItem>
+        @if (gameSelected)
+        {
+            <MudItem xs="12" sm="12">
+                <MudPaper Elevation="2" Class="pa-4" MinHeight="400px">
+                    <ActiveGame />
+                </MudPaper>
+            </MudItem>
+        }
+        <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+        <MudItem xs="12" sm="12">
+            <MudExpansionPanels >
+                <MudExpansionPanel Text="Regler">
+                    <TitleContent>
+                        <div class="d-flex">
+                            <MudIcon Icon="@Icons.Material.Filled.Rule" Color="Color.Primary" Class="mr-3" />
+                            <MudText>Regler for Canasta</MudText>
+                        </div>
+                    </TitleContent>
+                    <ChildContent>
+                        <Rules />
+                    </ChildContent>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+            
+        </MudItem>
+        
+
+
+    </MudGrid>
+</MudContainer>
+
+
+
+@code {
+    bool isValid;
+    bool gameSelected;
+    public List<object> collection { get; set; }
+
+    public object teamOne { get; set; }
+    public object teamTwo { get; set; }
+
+    public Game()
+    {
+        collection = new() { "boys", "girls" };
+
+
+    }
+    private void StartNewGame_onClick()
+    {
+
+        snackBar.Add("Nyt spil er startet", Severity.Success);
+        gameSelected = !gameSelected;
+    }
+}

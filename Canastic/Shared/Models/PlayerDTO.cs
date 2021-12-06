@@ -19,7 +19,7 @@ namespace SharedService.Models
     }
 
     [BsonIgnoreExtraElements]
-    public class Player
+    public class PlayerDTO
     {
         [BsonId]
         public Guid Id { get; set; }
