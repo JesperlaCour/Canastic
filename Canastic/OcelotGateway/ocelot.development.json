@@ -9,8 +9,8 @@
           "Port": 15020
         }
       ],
-      "UpstreamPathTemplate": "/api/player",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamPathTemplate": "/player",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post","Delete" ]
     }
   ],
   "GlobalConfiguration": {

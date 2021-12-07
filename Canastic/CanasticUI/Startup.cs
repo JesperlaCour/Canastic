@@ -39,7 +39,6 @@ namespace CanasticUI
             //{
             //    client.BaseAddress = new Uri(UriString);
             //});
-            services.AddSingleton<WeatherForecastService>();
             
         }
 

@@ -10,7 +10,7 @@ namespace GameService.Endpoints.Game
     {
         [HttpPost("/GameFinished")]
         [SwaggerOperation(
-            Summary = "return all active games"
+            Summary = "Gets called when game is finish"
             )]
         public override ActionResult Handle(GameFinishedDTO request)
         {
