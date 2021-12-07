@@ -1,4 +1,11 @@
-  rabbitmq:
+Docker compose afvikl i samme mappe som docker-compose.yml
+Docker-compose up --build
+Docker-compose ps
+
+ 
+
+Tilføj rabbitMQ til docker-compose
+rabbitmq:
     image: rabbitmq:3.9-management
     container_name: 'rabbitmq'
     ports:

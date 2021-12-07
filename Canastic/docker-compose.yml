@@ -5,6 +5,8 @@ services:
     image: ${DOCKER_REGISTRY-}playerservice
     container_name: 'playerservice'
     restart: always
+    depends_on:
+        - 'rabbitmq'
     build:
       context: .
       dockerfile: UserService/Dockerfile
@@ -34,7 +36,8 @@ services:
     image: ${DOCKER_REGISTRY-}gameservice
     container_name: 'gameservice'
     ports:
-        - 17020:17020
+        - 17020:80
+        - 17021:443
     build:
       context: .
       dockerfile: GameService/Dockerfile
