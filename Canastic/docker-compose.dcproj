@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>17ead572-eec3-4862-94a8-e8f3ae6db9e5</ProjectGuid>
+    <ProjectGuid>72605e6e-b4b4-4bc9-975f-af6e1fd9e5aa</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>playerservice</DockerServiceName>
