@@ -1,0 +1,58 @@
+version: '3.4'
+
+services:
+  playerservice:
+    image: ${DOCKER_REGISTRY-}playerservice
+    container_name: 'playerservice'
+    #ports:
+        #- 15020:15020
+        #- 15021:15021
+    build:
+      context: .
+      dockerfile: UserService/Dockerfile
+
+  ocelotgateway:
+    image: ${DOCKER_REGISTRY-}ocelotgateway
+    container_name: 'ocelotgateway'
+    #ports:
+    #    - 14020:14020
+    #    - 14021:14021
+    build:
+      context: .
+      dockerfile: OcelotGateway/Dockerfile
+
+
+  gameservice:
+    image: ${DOCKER_REGISTRY-}gameservice
+    container_name: 'gameservice'
+    ports:
+        - 17020:17020
+        - 17021:17021
+    build:
+      context: .
+      dockerfile: GameService/Dockerfile
+
+
+  canasticui:
+    image: ${DOCKER_REGISTRY-}canasticui
+    container_name: 'canasticui'
+    ports:
+        - 16020:16020
+        - 16021:16021
+    build:
+      context: .
+      dockerfile: CanasticUI/Dockerfile
+
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: 'rabbitmqCompose'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+
+

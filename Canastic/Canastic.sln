@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardML_V2", "CardML_V2\Card
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CanasticUI", "CanasticUI\CanasticUI.csproj", "{C572C55E-E2E6-460D-8A96-922EBAA3F686}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "OcelotGateway\OcelotGateway.csproj", "{296AA6E7-5F73-4BCA-B7A5-3E5312B5419D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "OcelotGateway\OcelotGateway.csproj", "{296AA6E7-5F73-4BCA-B7A5-3E5312B5419D}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{17EAD572-EEC3-4862-94A8-E8F3AE6DB9E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{296AA6E7-5F73-4BCA-B7A5-3E5312B5419D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{296AA6E7-5F73-4BCA-B7A5-3E5312B5419D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{296AA6E7-5F73-4BCA-B7A5-3E5312B5419D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EAD572-EEC3-4862-94A8-E8F3AE6DB9E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EAD572-EEC3-4862-94A8-E8F3AE6DB9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EAD572-EEC3-4862-94A8-E8F3AE6DB9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EAD572-EEC3-4862-94A8-E8F3AE6DB9E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

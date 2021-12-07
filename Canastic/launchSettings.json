@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchServiceName": "ocelotgateway",
+      "serviceActions": {
+        "canasticui": "StartDebugging",
+        "gameservice": "StartDebugging",
+        "ocelotgateway": "StartDebugging",
+        "playerservice": "StartDebugging",
+        "rabbitmq": "StartWithoutDebugging"
+      },
+      "composeLaunchAction": "LaunchBrowser",
+      "commandVersion": "1.0",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}"
+    }
+  }
+}

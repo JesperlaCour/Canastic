@@ -17,7 +17,7 @@ namespace CanasticUI.Data
         public PlayerService(HttpClient client)
         {
             this.client = client;
-            client.BaseAddress = new Uri("http://localhost:14020");
+            client.BaseAddress = new Uri("https://OcelotGateway:443");
         }
 
         public async Task<List<PlayerDTO>> GetPlayers()
