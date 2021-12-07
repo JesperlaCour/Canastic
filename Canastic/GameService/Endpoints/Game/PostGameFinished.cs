@@ -14,7 +14,7 @@ namespace GameService.Endpoints.Game
             )]
         public override ActionResult Handle(GameFinishedDTO request)
         {
-            using (var _bus = RabbitHutch.CreateBus("host=rabbitmqCompose"))
+            using (var _bus = RabbitHutch.CreateBus("host=rabbitmq"))
             {
                 _bus.PubSub.Publish(request);
                 return Ok();

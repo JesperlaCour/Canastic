@@ -22,7 +22,7 @@ namespace PlayerService.Services
 
         public SubscribeService()
         {
-            _bus = RabbitHutch.CreateBus("host=rabbitmqCompose");
+            _bus = RabbitHutch.CreateBus("host=rabbitmq");
             DbService = new(DbTable);
         }
 
