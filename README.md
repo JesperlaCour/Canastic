@@ -3,8 +3,8 @@ A fantastic canasta app
 
 To run in docker
 
-1. 
+1.
 docker-compose up
 
 2.
-enjoy
+enjoy Canastic on localhost:16020
