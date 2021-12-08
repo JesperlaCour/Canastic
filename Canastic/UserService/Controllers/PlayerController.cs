@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PlayerService.Services;
 using SharedService.Models;
 using System;
@@ -16,17 +17,20 @@ namespace PlayerService.Controllers
     {
         public string DbTable { get; set; }
         public MongoService DbService { get; set; }
+        private readonly ILogger _logger;
 
-        public PlayerController()
+        public PlayerController(ILogger<PlayerController> logger)
         {
             DbTable = "Players";
             DbService = new(DbTable);
+            _logger = logger;
         }
 
         // GET: api/<PlayerController>
         [HttpGet]
         public IEnumerable<PlayerDTO> Get()
         {
+            _logger.LogInformation("Players is returned after request");
             var result = DbService.LoadRecords<PlayerDTO>(DbTable);
             return result.ToList();
         }

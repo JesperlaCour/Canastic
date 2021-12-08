@@ -3,13 +3,14 @@ version: '3.4'
 services:
   playerservice:
     image: ${DOCKER_REGISTRY-}playerservice
-    container_name: 'playerservice'
+    #container_name: 'playerservice'
     restart: always
-    depends_on:
-        - 'rabbitmq'
+    deploy:
+        replicas: 2
     build:
       context: .
       dockerfile: UserService/Dockerfile
+    
 
   rabbitmq:
     image: rabbitmq:3.9-management
@@ -17,6 +18,11 @@ services:
     ports:
         - 5672:5672
         - 15672:15672
+    #healthcheck:
+    #    test: ["CMD", "curl", "-f", "http://localhost:15672"]
+    #    interval: 30s
+    #    timeout: 10s
+    #    retries: 5
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
@@ -26,7 +32,6 @@ services:
     container_name: 'ocelotgateway'
     ports:
         - 14020:80
-        - 14021:443
     build:
       context: .
       dockerfile: OcelotGateway/Dockerfile
@@ -47,7 +52,6 @@ services:
     container_name: 'canasticui'
     ports:
         - 16020:80
-        - 16021:443
     build:
       context: .
       dockerfile: CanasticUI/Dockerfile
