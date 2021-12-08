@@ -17,14 +17,14 @@ namespace CanasticUI.Data
         public PlayerService(HttpClient client)
         {
             this.client = client;
-            client.BaseAddress = new Uri("https://localhost:44382");
+            client.BaseAddress = new Uri("http://OcelotGateway:80");
         }
 
         public async Task<List<PlayerDTO>> GetPlayers()
         {
             try
             {
-                var result = await client.GetFromJsonAsync<List<PlayerDTO>>("api/player");
+                var result = await client.GetFromJsonAsync<List<PlayerDTO>>("/player");
                 return result;
             }
             catch (Exception)
@@ -37,19 +37,19 @@ namespace CanasticUI.Data
 
         public async Task UpdatePlayer(PlayerDTO player)
         {
-            var result = await client.PutAsJsonAsync("api/player", player);
+            var result = await client.PutAsJsonAsync("/player", player);
         }
 
         public async Task PostPlayer(PlayerDTO player)
         {
             
-            var result = await client.PostAsJsonAsync("api/player",player);
+            var result = await client.PostAsJsonAsync("/player",player);
         }
 
         public async Task DeletePlayer(Guid id)
         {
             
-            var result = await client.DeleteAsync($"api/player/{id}");
+            var result = await client.DeleteAsync($"/player/{id}");
         }
 
 

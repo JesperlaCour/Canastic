@@ -10,11 +10,11 @@ namespace GameService.Endpoints.Game
     {
         [HttpPost("/GameFinished")]
         [SwaggerOperation(
-            Summary = "return all active games"
+            Summary = "Gets called when game is finish"
             )]
         public override ActionResult Handle(GameFinishedDTO request)
         {
-            using (var _bus = RabbitHutch.CreateBus("host=localhost"))
+            using (var _bus = RabbitHutch.CreateBus("host=rabbitmq"))
             {
                 _bus.PubSub.Publish(request);
                 return Ok();

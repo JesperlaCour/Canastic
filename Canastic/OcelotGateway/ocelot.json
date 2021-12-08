@@ -1,0 +1,19 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/player",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "PlayerService",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/player",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post","Delete" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:14020"
+  }
+}

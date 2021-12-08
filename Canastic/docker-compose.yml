@@ -1,0 +1,58 @@
+version: '3.4'
+
+services:
+  playerservice:
+    image: ${DOCKER_REGISTRY-}playerservice
+    #container_name: 'playerservice'
+    restart: always
+    deploy:
+        replicas: 2
+    build:
+      context: .
+      dockerfile: UserService/Dockerfile
+    
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    #healthcheck:
+    #    test: ["CMD", "curl", "-f", "http://localhost:15672"]
+    #    interval: 30s
+    #    timeout: 10s
+    #    retries: 5
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+  ocelotgateway:
+    image: ${DOCKER_REGISTRY-}ocelotgateway
+    container_name: 'ocelotgateway'
+    ports:
+        - 14020:80
+    build:
+      context: .
+      dockerfile: OcelotGateway/Dockerfile
+
+
+  gameservice:
+    image: ${DOCKER_REGISTRY-}gameservice
+    container_name: 'gameservice'
+    ports:
+        - 17020:80
+        - 17021:443
+    build:
+      context: .
+      dockerfile: GameService/Dockerfile
+
+  canasticui:
+    image: ${DOCKER_REGISTRY-}canasticui
+    container_name: 'canasticui'
+    ports:
+        - 16020:80
+    build:
+      context: .
+      dockerfile: CanasticUI/Dockerfile
+

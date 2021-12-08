@@ -1,7 +1,29 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<MudText Typo="Typo.h2" Align="Align.Center" GutterBottom="true">Canastic</MudText>
+<MudCarousel Style="height:200px;" ShowArrows="true" ShowDelimiters="true" AutoCycle="true" TData="object">
+    <MudCarouselItem Transition="Transition.Slide" Color="@Color.Primary">
+        <div class="d-flex" style="height:100%;width:75%">
+            <MudIcon Class="mx-auto my-auto" Size="@Size.Large" />
+            <p Class="mx-auto my-auto"><em>Stærkt vanedanende. Risiko for overforbrug. Elsker det!</em></p>
+            <MudRating Class="mx-auto my-auto" ReadOnly="true" MaxValue="5" SelectedValue="3" />
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem Transition="Transition.Slide" Color="@Color.Secondary">
+        <div class="d-flex" style="height:100%; width:75%">
+            <MudIcon Class="mx-auto my-auto" Size="@Size.Large" />
+            <p Class="mx-auto my-auto"><em>Sjoveste spil for hele familien</em></p>
+            <MudRating Class="mx-auto my-auto" ReadOnly="true" MaxValue="5" SelectedValue="5" />
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem Transition="Transition.Slide">
+        <div class="d-flex" style="height:100%; width:75%">
+            <MudIcon Class="mx-auto my-auto" Size="@Size.Large" />
+            <p Class="mx-auto my-auto"><em>Fedt spil. Modspillerne snød uden tvivl. </em></p>
+            <MudRating Class="mx-auto my-auto" ReadOnly="true" MaxValue="5" SelectedValue="4" />
+        </div>
+    </MudCarouselItem>
+</MudCarousel>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
