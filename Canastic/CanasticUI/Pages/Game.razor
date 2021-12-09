@@ -15,13 +15,13 @@
                     </TitleContent>
                     <ChildContent>
                         <MudForm @bind-IsValid="@isValid">
-                            <MudSelect @bind-Value="teamOne" Required="true" T="object" Label="Team 1">
+                            <MudSelect @bind-Value="teamOne" Required="true" T="string" Label="Team 1">
                                 @foreach (var item in collection)
                                 {
                                     <MudSelectItem Value="item"></MudSelectItem>
                                 }
                             </MudSelect>
-                            <MudSelect @bind-Value="teamTwo" Required="true" T="object" Label="Team 2">
+                            <MudSelect @bind-Value="teamTwo" Required="true" T="string" Label="Team 2">
                                 @foreach (var item in collection)
                                 {
                                     <MudSelectItem Value="item"></MudSelectItem>
@@ -49,7 +49,7 @@
         {
             <MudItem xs="12" sm="12">
                 <MudPaper Elevation="2" Class="pa-4" MinHeight="400px">
-                    <ActiveGame />
+                    <ActiveGame teamOneName="@teamOne" teamTwoName="@teamTwo"   />
                 </MudPaper>
             </MudItem>
         }
@@ -81,14 +81,14 @@
 @code {
     bool isValid;
     bool gameSelected;
-    public List<object> collection { get; set; }
+    public List<string> collection { get; set; }
 
-    public object teamOne { get; set; }
-    public object teamTwo { get; set; }
+    public string teamOne { get; set; }
+    public string teamTwo { get; set; }
 
     public Game()
     {
-        collection = new() { "boys", "girls" };
+        collection = new() { "Blue", "Yellow", "Green", "Red" };
 
 
     }

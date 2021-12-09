@@ -1,8 +1,162 @@
 ﻿@page "/ActiveGame"
+
 @inject PlayerService _playerService
 @inject ISnackbar snackBar
+
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.Small">
+
+    <MudItem xs="12" sm="12">
+        <MudItem xs="12" sm="12">
+            <MudText Align="Align.Center" Typo="Typo.h6">Point i runden</MudText>
+        </MudItem>
+
+        <MudForm @ref="form" @bind-IsValid="@isValid">
+            <div class="d-flex">
+
+                <MudItem sm="6" xs="12" md="6">
+                    <MudNumericField @bind-Value="pointOne" Required="true" Step="5" Label="@teamOneName" Variant="Variant.Text" />
+                </MudItem>
+                <MudItem sm="6" xs="12" md="6">
+                    <MudNumericField @bind-Value="pointTwo" Required="true" Step="5" Label="@teamTwoName" Variant="Variant.Text" />
+                </MudItem>
+            </div>
+            <MudButton Disabled="@(!isValid)" Color="Color.Success" Variant="Variant.Filled" FullWidth="true" Style="margin-top: 10px; justify-content:center" EndIcon="@Icons.Material.Filled.PlayCircleFilled" OnClick="AddRound">Tilføj point</MudButton>
+        </MudForm>
+    </MudItem>
+    <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+    <MudText Align="Align.Center" Typo="Typo.h6">Total for spillet</MudText>
+    <MudItem xs="12" sm="12">
+        <MudGrid Justify="Justify.SpaceEvenly">
+            <MudItem>
+                <MudProgressCircular Size="Size.Large" Color="@Color.Info" Value="@totalPointOne" Max="@WinningScore" />
+                <MudText Typo="Typo.caption" Align="Align.Center">@totalPointOne</MudText>
+            </MudItem>
+            <MudItem>
+                <MudProgressCircular Size="Size.Large" Color="@Color.Info" Value="@totalPointTwo" Max="@WinningScore" />
+                <MudText Typo="Typo.caption" Align="Align.Center">@totalPointTwo</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+    <MudTable Items="rounds" Dense="true" Hover="true" @bind-SelectedItem="selectedItem" CanCancelEdit="true"
+              CommitEditTooltip="Commit Edit" OnCommitEditClick="OnCommitEdit" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues">
+        <HeaderContent>
+            <MudTh>@teamOneName</MudTh>
+            <MudTh>@teamTwoName</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="@teamOneName">@context.PointsTeam1</MudTd>
+            <MudTd DataLabel="@teamTwoName">@context.PointsTeam2</MudTd>
+        </RowTemplate>
+        <RowEditingTemplate>
+            <MudTd DataLabel="@teamOneName">
+                <MudNumericField @bind-Value="@context.PointsTeam1" Required />
+            </MudTd>
+            <MudTd DataLabel="@teamTwoName">
+                <MudNumericField @bind-Value="@context.PointsTeam2" Required />
+            </MudTd>
+        </RowEditingTemplate>
+
+    </MudTable>
+
+</MudContainer>
+
+
+
+@*<table style="margin-top: 100px">
+        <h3>Point i dette spil</h3>
+        <tr>
+            <td>Team @teamOneName</td>
+            <td>Team @teamTwoName</td>
+        </tr>
+        @foreach (var item in rounds)
+        {
+            <tr>
+                <td>@item.PointsTeam1</td>
+                <td>@item.PointsTeam2</td>
+            </tr>
+        }
+
+    </table>*@
 
 
 @code {
 
+    [Parameter]
+    public string teamOneName { get; set; }
+
+    [Parameter]
+    public string teamTwoName { get; set; }
+
+    bool isValid;
+    MudForm form;
+    IList<Round> rounds = new List<Round>();
+    int? pointOne;
+    int? pointTwo;
+    int totalPointOne;
+    int totalPointTwo;
+    int WinningScore = 10000;
+    private Round selectedItem = null;
+    private Round elementBeforeEdit;
+
+    void AddRound()
+    {
+        if (pointOne > 0 && pointTwo > 0)
+        {
+            rounds.Add(new Round { PointsTeam1 = Convert.ToInt32(pointOne), PointsTeam2 = Convert.ToInt32(pointTwo) });
+            totalPointOne = rounds.Sum(x => x.PointsTeam1);
+            totalPointTwo = rounds.Sum(x => x.PointsTeam2);
+            pointOne = null;
+            pointTwo = null;
+
+            CheckForWinner();
+        }
+
+    }
+
+    public class Round
+    {
+        public int PointsTeam1 { get; set; }
+        public int PointsTeam2 { get; set; }
+    }
+
+
+    void CheckForWinner()
+    {
+
+        if (totalPointOne >= WinningScore && totalPointTwo >= WinningScore)
+        {
+            //messagebox
+        }
+        else if (totalPointOne >= WinningScore)
+        {
+            //messagebox
+        }
+        else if (totalPointTwo >= WinningScore)
+        {
+            //messagebox
+
+        }
+    }
+    private void BackupItem(object round)
+    {
+        elementBeforeEdit = new()
+        {
+            PointsTeam1 = ((Round)round).PointsTeam1,
+            PointsTeam2 = ((Round)round).PointsTeam2
+        };
+    }
+    private void ResetItemToOriginalValues(Object round)
+    {
+        ((Round)round).PointsTeam1 = elementBeforeEdit.PointsTeam1;
+        ((Round)round).PointsTeam2 = elementBeforeEdit.PointsTeam2;
+    }
+    private void OnCommitEdit()
+    {
+        totalPointOne = rounds.Sum(x => x.PointsTeam1);
+        totalPointTwo = rounds.Sum(x => x.PointsTeam2);
+        snackBar.Add("Der blev redigeret i pointene", Severity.Warning);
+
+    }
 }
+
