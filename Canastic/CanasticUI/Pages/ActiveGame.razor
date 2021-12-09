@@ -33,13 +33,13 @@
             </MudItem>
             <MudItem>
                 <MudProgressCircular Size="Size.Large" Color="@Color.Info" Value="@totalPointTwo" Max="@WinningScore" />
-                <MudText Typo="Typo.caption" Align="Align.Center">@totalPointOne</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Center">@totalPointTwo</MudText>
             </MudItem>
         </MudGrid>
     </MudItem>
     <MudDivider DividerType="DividerType.Middle" Class="my-6" />
-    <MudTable Items="rounds" Dense="true" Hover="true" @bind-SelectedItem="selectedItem" 
-              CommitEditTooltip="Commit Edit" OnCommitEditClick="@(() => snackBar.Add("Der blev redigeret i pointene"))" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues">
+    <MudTable Items="rounds" Dense="true" Hover="true" @bind-SelectedItem="selectedItem" CanCancelEdit="true"
+              CommitEditTooltip="Commit Edit" OnCommitEditClick="OnCommitEdit" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues">
         <HeaderContent>
             <MudTh>@teamOneName</MudTh>
             <MudTh>@teamTwoName</MudTh>
@@ -55,7 +55,6 @@
             <MudTd DataLabel="@teamTwoName">
                 <MudNumericField @bind-Value="@context.PointsTeam2" Required />
             </MudTd>
-            <MudTd DataLabel="@teamTwoName">@context.PointsTeam2</MudTd>
         </RowEditingTemplate>
 
     </MudTable>
@@ -151,6 +150,13 @@
     {
         ((Round)round).PointsTeam1 = elementBeforeEdit.PointsTeam1;
         ((Round)round).PointsTeam2 = elementBeforeEdit.PointsTeam2;
+    }
+    private void OnCommitEdit()
+    {
+        totalPointOne = rounds.Sum(x => x.PointsTeam1);
+        totalPointTwo = rounds.Sum(x => x.PointsTeam2);
+        snackBar.Add("Der blev redigeret i pointene", Severity.Warning);
+
     }
 }
 
